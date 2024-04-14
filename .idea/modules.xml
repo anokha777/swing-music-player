@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Java-Swing-MusicPlayer.iml" filepath="$PROJECT_DIR$/Java-Swing-MusicPlayer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/swing-music-player.iml" filepath="$PROJECT_DIR$/swing-music-player.iml" />
     </modules>
   </component>
 </project>

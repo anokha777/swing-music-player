@@ -3,6 +3,7 @@ import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.Tag;
+import school.music.utils.SongConversionsImpl;
 
 import java.io.File;
 
@@ -15,13 +16,16 @@ public class Song {
     private Mp3File mp3File;
     private double frameRatePerMilliseconds;
 
+    private SongConversionsImpl songConversions;
+
 
     public Song(String filePath){
         this.filePath = filePath;
+        songConversions = new SongConversionsImpl();
         try{
             mp3File = new Mp3File(filePath);
             frameRatePerMilliseconds = (double) mp3File.getFrameCount() / mp3File.getLengthInMilliseconds();
-            songLength = convertToSongLengthFormat();
+            songLength = songConversions.convertToSongLengthFormat(mp3File);
 
             // use the jaudiotagger library to create an audiofile obj to read mp3 file's information
             AudioFile audioFile = AudioFileIO.read(new File(filePath));
@@ -37,17 +41,9 @@ public class Song {
                 songArtist = "N/A";
             }
         }catch(Exception e){
-            System.out.println("some test message");
-            e.printStackTrace();
+            System.out.println("Please select only audio file!");
+            // e.printStackTrace();
         }
-    }
-
-    private String convertToSongLengthFormat(){
-        long minutes = mp3File.getLengthInSeconds() / 60;
-        long seconds = mp3File.getLengthInSeconds() % 60;
-        String formattedTime = String.format("%02d:%02d", minutes, seconds);
-
-        return formattedTime;
     }
 
     // getters

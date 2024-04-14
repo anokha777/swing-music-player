@@ -221,6 +221,7 @@ public class MusicPlayer extends PlaybackListener {
             startPlaybackSliderThread();
 
         }catch(Exception e){
+            System.out.println("Please select only audio file.");
             e.printStackTrace();
         }
     }

@@ -1,3 +1,6 @@
+import school.music.utils.PlayerGUI;
+import school.music.utils.PlayerGUIImpl;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -11,6 +14,7 @@ import java.io.File;
 import java.util.Hashtable;
 
 public class MusicPlayerGUI extends JFrame {
+    PlayerGUI playerGUI;
     // color configurations
     public static final Color FRAME_COLOR = Color.BLACK;
     public static final Color TEXT_COLOR = Color.WHITE;
@@ -28,6 +32,7 @@ public class MusicPlayerGUI extends JFrame {
         // calls JFrame constructor to configure out gui and set the title heaader to "Music Player"
         super("Music Player");
 
+        playerGUI = new PlayerGUIImpl();
         // set the width and height
         setSize(400, 600);
 
@@ -64,7 +69,7 @@ public class MusicPlayerGUI extends JFrame {
         addToolbar();
 
         // load record image
-        JLabel songImage = new JLabel(loadImage("src/assets/record.png"));
+        JLabel songImage = new JLabel(playerGUI.loadImage("src/assets/record.png"));
         songImage.setBounds(0, 50, getWidth() - 20, 225);
         add(songImage);
 
@@ -213,7 +218,7 @@ public class MusicPlayerGUI extends JFrame {
         playbackBtns.setBackground(null);
 
         // previous button
-        JButton prevButton = new JButton(loadImage("src/assets/previous.png"));
+        JButton prevButton = new JButton(playerGUI.loadImage("src/assets/previous.png"));
         prevButton.setBorderPainted(false);
         prevButton.setBackground(null);
         prevButton.addActionListener(new ActionListener() {
@@ -226,7 +231,7 @@ public class MusicPlayerGUI extends JFrame {
         playbackBtns.add(prevButton);
 
         // play button
-        JButton playButton = new JButton(loadImage("src/assets/play.png"));
+        JButton playButton = new JButton(playerGUI.loadImage("src/assets/play.png"));
         playButton.setBorderPainted(false);
         playButton.setBackground(null);
         playButton.addActionListener(new ActionListener() {
@@ -242,7 +247,7 @@ public class MusicPlayerGUI extends JFrame {
         playbackBtns.add(playButton);
 
         // pause button
-        JButton pauseButton = new JButton(loadImage("src/assets/pause.png"));
+        JButton pauseButton = new JButton(playerGUI.loadImage("src/assets/pause.png"));
         pauseButton.setBorderPainted(false);
         pauseButton.setBackground(null);
         pauseButton.setVisible(false);
@@ -259,7 +264,7 @@ public class MusicPlayerGUI extends JFrame {
         playbackBtns.add(pauseButton);
 
         // next button
-        JButton nextButton = new JButton(loadImage("src/assets/next.png"));
+        JButton nextButton = new JButton(playerGUI.loadImage("src/assets/next.png"));
         nextButton.setBorderPainted(false);
         nextButton.setBackground(null);
         nextButton.addActionListener(new ActionListener() {
@@ -334,21 +339,6 @@ public class MusicPlayerGUI extends JFrame {
         // turn off pause button
         pauseButton.setVisible(false);
         pauseButton.setEnabled(false);
-    }
-
-    private ImageIcon loadImage(String imagePath){
-        try{
-            // read the image file from the given path
-            BufferedImage image = ImageIO.read(new File(imagePath));
-
-            // returns an image icon so that our component can render the image
-            return new ImageIcon(image);
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-
-        // could not find resource
-        return null;
     }
 }
 
